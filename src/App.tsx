@@ -1,6 +1,12 @@
-import React from 'react'
+import React from 'react';
+import ThemeProvider from './Contexts/ThemeProvider';
+import './GlobalStyle.scss';
 
 const App: React.FC = () => {
-  return <div>This is the App Component !!!</div>
-}
-export default App
+  return (
+    <ThemeProvider>
+      <div className="main-app">This is the App Component !!!</div>
+    </ThemeProvider>
+  );
+};
+export default App;
