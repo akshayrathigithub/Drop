@@ -1,0 +1,16 @@
+@import './Theme.scss';
+@import './Variable.scss';
+
+%font {
+  color: $black-color;
+  letter-spacing: $font-letter-spacing-one;
+  font-style: $font-style-normal;
+}
+
+%upload-title {
+  @extend %font;
+  font-size: $font-size-12;
+  font-weight: $font-weight-medium;
+  line-height: $font-line-height-eight;
+  color: #4137a4;
+}
