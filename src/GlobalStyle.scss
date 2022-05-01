@@ -1,0 +1,25 @@
+@import './Styles/Variable.scss';
+@import './Styles/Theme.scss';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  font-family: $font-primary;
+  font-weight: $font-weight-normal;
+}
+
+.main-app {
+  width: 100vw;
+  max-width: 100%;
+  position: relative;
+
+  // @include themed() {
+  //   background-color: t('backgroundColor');
+  // }
+}
