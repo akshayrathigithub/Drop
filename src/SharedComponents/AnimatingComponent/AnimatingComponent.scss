@@ -35,3 +35,38 @@
     }
   }
 }
+
+.animating-card-wrapper {
+  width: 9rem;
+  padding: 10px 15px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  & .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 5px;
+      background-color: red;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    & .text {
+      font-size: 16px;
+      color: red;
+      font-weight: 500;
+    }
+  }
+}
