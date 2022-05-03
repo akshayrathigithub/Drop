@@ -26,9 +26,7 @@ const Upload: React.FC<UploadProps> = (props) => {
           <AnimatingIcon color="blue" />
         </div>
 
-        <div className="drag-N-drop">
-          <DragNDrop />
-        </div>
+        <DragNDrop />
       </div>
     </Container>
   );

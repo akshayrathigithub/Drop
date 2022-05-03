@@ -46,6 +46,10 @@
     animation: live-four 1.5s ease-in-out infinite;
   }
 
+  & .drag-N-drop {
+    position: relative;
+  }
+
   @keyframes live-one {
     0% {
       transform: translate3d(0px, 0px, 0);
