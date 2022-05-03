@@ -1,0 +1,86 @@
+@import '../../Styles/Variable.scss';
+@import '../../Styles/Theme.scss';
+@import '../../Styles/Style.scss';
+
+.drag-drop-wrapper {
+  background-color: white;
+  border-radius: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 450px;
+  height: 300px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .svg-wrapper {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+
+    & .svg {
+      border-radius: 5px;
+      width: 100%;
+
+      & .path {
+        animation: dash 16s linear infinite;
+        stroke-dasharray: 5;
+      }
+    }
+  }
+
+  & .svg-wrapper-active {
+    background-color: red;
+  }
+
+  & .content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 15;
+
+    & .text {
+      color: red;
+      @extend %upload-title;
+      font-size: 16px;
+    }
+
+    & .file-upload-wrapper {
+      position: relative;
+      cursor: pointer;
+
+      & .file-upload {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      & .upload-btn {
+        color: red;
+        @extend %upload-title;
+        font-size: 16px;
+      }
+
+      &:hover {
+        & .upload-btn {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 1000;
+    }
+  }
+}
