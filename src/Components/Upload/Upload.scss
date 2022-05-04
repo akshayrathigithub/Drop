@@ -20,9 +20,10 @@
 
   & .animating-one {
     position: absolute;
-    top: 130px;
+    top: 120px;
     left: 90px;
     animation: live-one 2s ease-in-out infinite;
+    transition: left 1.5s, top 1s ease-in;
   }
 
   & .animating-two {
@@ -30,6 +31,7 @@
     top: 130px;
     right: 90px;
     animation: live-two 1.5s ease-in-out infinite;
+    transition: right 1.5s, top 1s ease-in;
   }
 
   & .animating-three {
@@ -37,6 +39,7 @@
     top: 300px;
     left: 150px;
     animation: live-three 2.5s ease-in-out infinite;
+    transition: left 1.5s, top 1s ease-in;
   }
 
   & .animating-four {
@@ -44,6 +47,27 @@
     top: 300px;
     right: 150px;
     animation: live-four 1.5s ease-in-out infinite;
+    transition: right 1.5s, top 1s ease-in;
+  }
+
+  & .hide-animating-one {
+    top: 370px;
+    left: 550px;
+  }
+
+  & .hide-animating-two {
+    top: 370px;
+    right: 550px;
+  }
+
+  & .hide-animating-three {
+    top: 370px;
+    left: 550px;
+  }
+
+  & .hide-animating-four {
+    top: 370px;
+    right: 550px;
   }
 
   & .drag-N-drop {
