@@ -5,34 +5,47 @@ import './DragNDrop.scss';
 const DragNDrop: React.FC<DragNDropProps> = (props) => {
   const svgWrapperRef = React.useRef<HTMLDivElement>(null);
   const onDragEnter = (event: DragEvent<HTMLDivElement>): void => {
+    event.preventDefault();
+    event.stopPropagation();
     if (svgWrapperRef.current) {
       svgWrapperRef.current.classList.add('svg-wrapper-active');
     }
-    console.log('onDragEnter');
   };
 
   const onDragLeave = (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
     if (svgWrapperRef.current) {
       svgWrapperRef.current.classList.remove('svg-wrapper-active');
     }
-    console.log('drag leave');
   };
 
   const onDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.stopPropagation();
-    console.log('drop', event);
+
+    if (svgWrapperRef.current) {
+      svgWrapperRef.current.classList.remove('svg-wrapper-active');
+    }
+    if (event.dataTransfer.files && event.dataTransfer.files.length > 0) {
+      props.filesDropped(true);
+    }
+  };
+
+  const onDragOver = (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
   };
 
   return (
-    <div className="drag-drop-wrapper">
-      <div
-        className="svg-wrapper"
-        ref={svgWrapperRef}
-        onDragEnter={onDragEnter}
-        onDragLeave={onDragLeave}
-        onDrop={onDrop}
-      >
+    <div
+      className="drag-drop-wrapper"
+      onDragEnter={onDragEnter}
+      onDragLeave={onDragLeave}
+      onDrop={onDrop}
+      onDragOver={onDragOver}
+    >
+      <div className="svg-wrapper" ref={svgWrapperRef}>
         <svg className="svg" viewBox="0 0 400 250">
           <polygon
             className="path"

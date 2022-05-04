@@ -1,3 +1,3 @@
 export interface DragNDropProps {
-  hello?: string;
+  filesDropped: (action: boolean) => void;
 }
