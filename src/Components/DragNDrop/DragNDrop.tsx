@@ -1,9 +1,10 @@
-import React, { DragEvent } from 'react';
+import React, { ChangeEvent, DragEvent } from 'react';
 import { DragNDropProps } from './DragNDrop.interface';
 import './DragNDrop.scss';
 
 const DragNDrop: React.FC<DragNDropProps> = (props) => {
   const svgWrapperRef = React.useRef<HTMLDivElement>(null);
+
   const onDragEnter = (event: DragEvent<HTMLDivElement>): void => {
     event.preventDefault();
     event.stopPropagation();
@@ -37,6 +38,13 @@ const DragNDrop: React.FC<DragNDropProps> = (props) => {
     event.stopPropagation();
   };
 
+  const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      props.filesDropped(true);
+      console.log(event.target.files[0]);
+    }
+  };
+
   return (
     <div
       className="drag-drop-wrapper"
@@ -66,6 +74,7 @@ const DragNDrop: React.FC<DragNDropProps> = (props) => {
             type="file"
             name="fileUpload"
             accept="image/*"
+            onChange={onFileChange}
           />
           <div className="upload-btn">Browse File</div>
         </div>
