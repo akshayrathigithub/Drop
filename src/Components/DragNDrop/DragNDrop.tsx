@@ -1,9 +1,17 @@
-import React, { ChangeEvent, DragEvent } from 'react';
-import { DragNDropProps } from './DragNDrop.interface';
+import { cloneDeep } from 'lodash';
+import React, { ChangeEvent, DragEvent, useState, useRef } from 'react';
+import {
+  DragNDropProps,
+  DragNDropState,
+  initialDragNDropState,
+} from './DragNDrop.interface';
 import './DragNDrop.scss';
 
 const DragNDrop: React.FC<DragNDropProps> = (props) => {
-  const svgWrapperRef = React.useRef<HTMLDivElement>(null);
+  const svgWrapperRef = useRef<HTMLDivElement>(null);
+  const [state, setState] = useState<DragNDropState>(
+    cloneDeep(initialDragNDropState)
+  );
 
   const onDragEnter = (event: DragEvent<HTMLDivElement>): void => {
     event.preventDefault();
@@ -29,7 +37,7 @@ const DragNDrop: React.FC<DragNDropProps> = (props) => {
       svgWrapperRef.current.classList.remove('svg-wrapper-active');
     }
     if (event.dataTransfer.files && event.dataTransfer.files.length > 0) {
-      props.filesDropped(true);
+      fileDroppedSuccessfully();
     }
   };
 
@@ -40,47 +48,57 @@ const DragNDrop: React.FC<DragNDropProps> = (props) => {
 
   const onFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
-      props.filesDropped(true);
+      fileDroppedSuccessfully();
       console.log(event.target.files[0]);
     }
   };
 
-  return (
-    <div
-      className="drag-drop-wrapper"
-      onDragEnter={onDragEnter}
-      onDragLeave={onDragLeave}
-      onDrop={onDrop}
-      onDragOver={onDragOver}
-    >
-      <div className="svg-wrapper" ref={svgWrapperRef}>
-        <svg className="svg" viewBox="0 0 400 250">
-          <polygon
-            className="path"
-            points="0 0, 400 0, 400 250, 0 250"
-            stroke="#000"
-            strokeWidth="5"
-            fill="none"
-            fillRule="evenodd"
-          />
-        </svg>
-      </div>
+  const fileDroppedSuccessfully = () => {
+    const updatedState = state;
+    updatedState.filesDropped = true;
+    setState({ ...updatedState });
+    props.filesDropped(true);
+  };
+  if (state.filesDropped) {
+    return <div className="drag-drop-wrapper"></div>;
+  } else {
+    return (
+      <div
+        className="drag-drop-wrapper"
+        onDragEnter={onDragEnter}
+        onDragLeave={onDragLeave}
+        onDrop={onDrop}
+        onDragOver={onDragOver}
+      >
+        <div className="svg-wrapper" ref={svgWrapperRef}>
+          <svg className="svg" viewBox="0 0 400 250">
+            <polygon
+              className="path"
+              points="0 0, 400 0, 400 250, 0 250"
+              stroke="#000"
+              strokeWidth="5"
+              fill="none"
+              fillRule="evenodd"
+            />
+          </svg>
+        </div>
 
-      <div className="content">
-        <div className="text">Drag & Drop files here to upload</div>
-        <div className="file-upload-wrapper">
-          <input
-            className="file-upload"
-            type="file"
-            name="fileUpload"
-            accept="image/*"
-            onChange={onFileChange}
-          />
-          <div className="upload-btn">Browse File</div>
+        <div className="content">
+          <div className="text">Drag & Drop files here to upload</div>
+          <div className="file-upload-wrapper">
+            <input
+              className="file-upload"
+              type="file"
+              name="fileUpload"
+              accept="image/*"
+              onChange={onFileChange}
+            />
+            <div className="upload-btn">Browse File</div>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default DragNDrop;
