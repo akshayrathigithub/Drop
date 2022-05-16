@@ -1,11 +1,13 @@
 import { cloneDeep } from 'lodash';
 import React, { ChangeEvent, DragEvent, useState, useRef } from 'react';
+import SVGIcon from '../../SharedComponents/SVGIcon/SVGIcon';
 import {
   DragNDropProps,
   DragNDropState,
   initialDragNDropState,
 } from './DragNDrop.interface';
 import './DragNDrop.scss';
+import FileIcon from '../../Assests/Icons/folder.svg';
 
 const DragNDrop: React.FC<DragNDropProps> = (props) => {
   const svgWrapperRef = useRef<HTMLDivElement>(null);
@@ -59,8 +61,27 @@ const DragNDrop: React.FC<DragNDropProps> = (props) => {
     setState({ ...updatedState });
     props.filesDropped(true);
   };
-  if (state.filesDropped) {
-    return <div className="drag-drop-wrapper"></div>;
+  if (!state.filesDropped) {
+    return (
+      <div className="drag-drop-wrapper">
+        <div className="file-wrapper">
+          <div className="file-details">
+            <div className="file-icon">
+              <SVGIcon>
+                <FileIcon />
+              </SVGIcon>
+            </div>
+            <div className="file">
+              <div className="title">Red Tech Modern Island House.zip</div>
+              <div className="sub-title">
+                <div className="size">5.3 MB</div>
+                <div className="file-type">ZIP</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   } else {
     return (
       <div
