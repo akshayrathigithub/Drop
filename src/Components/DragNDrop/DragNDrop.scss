@@ -91,11 +91,11 @@
 
     & .file-details {
       display: flex;
-      align-items: center;
 
       & .file-icon {
         width: 35px;
         height: 35px;
+        margin-right: 10px;
 
         svg {
           width: 100%;
@@ -128,4 +128,8 @@
       }
     }
   }
+}
+
+.uploaded-file-info {
+  align-items: initial;
 }

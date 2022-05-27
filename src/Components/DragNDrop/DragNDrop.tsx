@@ -63,7 +63,7 @@ const DragNDrop: React.FC<DragNDropProps> = (props) => {
   };
   if (!state.filesDropped) {
     return (
-      <div className="drag-drop-wrapper">
+      <div className="drag-drop-wrapper uploaded-file-info">
         <div className="file-wrapper">
           <div className="file-details">
             <div className="file-icon">
